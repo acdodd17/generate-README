@@ -2,6 +2,7 @@
 const inquirer = require('inquirer');
 const fs = require('fs');
 const generateMarkdown = require('./utils/generateMarkdown.js');
+const { title } = require('process');
 
 // Array of questions for user input
 const questions =  () => {
@@ -77,9 +78,6 @@ const questions =  () => {
             default: true
         },
         {
-
-        },
-        {
             type: 'confirm',
             name: 'confirmTests',
             message: 'Would you like to provide examples of tests you have written for your application?',
@@ -118,20 +116,21 @@ const questions =  () => {
     ]);
 };
 
-// Write README file
-const writeFile = (fileName, data) => {
-    fs.writeFile(`./${fileName}.md`, data, (err) => {
-        if (err) {
-            console.log(err)
-        }
-        console.log('Your README has been created!')
-    })
-};
 
 // Initialize app
 const init = () => {
     questions()
-    .then(writeFile(title, generateMarkdown))
+    .then (answers => {
+        console.log(answers);
+        const fileData = generateMarkdown(answers)
+        fs.writeFile(`./${title}.md`, fileData, (err) => {
+        
+            if (err) {
+                console.log(err)
+            }
+            console.log('Your README has been created!')
+        })
+    })
     .catch(err => {
         console.log(err);
     });
