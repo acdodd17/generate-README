@@ -58,16 +58,26 @@ const questions =  () => {
             }
         },
         {
-            type: 'input',
-            name: 'credits',
-            message: 'List your collaborators with links to their GitHub profiles. (Required)',
-            validate: projectCredits => {
-                if(projectCredits) {
-                    return true;
+            type: 'list',
+            name: 'license',
+            message: 'Choose a license (Required)',
+            choices: ['Apache', 'GNU', 'MIT', 'ISC', 'No license'],
+            validate: projectLicense=> {
+                if(projectLicense) {
+                    return true;   
                 } else {
-                    console.log('Please provide a list of your collaborators and links to their GitHub profiles!');
+                    console.log('Please choose a license option for your project!')
                 } return false;
             }
+        },
+        {
+            type: 'confirm',
+            name: 'contribution',
+            message: 'Would you like to use "Contributor Covenant" guidelines?',
+            default: true
+        },
+        {
+            
         },
         {
             type: 'confirm',
@@ -78,21 +88,8 @@ const questions =  () => {
         {
             type: 'input',
             name: 'tests',
-            message: 'List any tests you have written for your application and provide examples on how to run them. (Required)',
+            message: 'List any tests you have written for your application and provide examples on how to run them.',
             when: ({ confirmTests }) => confirmTests
-        },
-        {
-            type: 'list',
-            name: 'license',
-            message: 'Choose a license (Required)',
-            choices: ['Apache', 'GNU', 'MIT', 'ISC'],
-            validate: projectLicense=> {
-                if(projectLicense) {
-                    return true;   
-                } else {
-                    console.log('Please choose a License for your project!')
-                } return false;
-            }
         },
         {
             type: 'input',
@@ -122,15 +119,18 @@ const questions =  () => {
 };
 
 // TODO: Create a function to write README file
-function writeToFile(fileName, data) {
-    
+const writeToFile = (fileName, data) => {
+    generateMarkdown(answers);
 };
 
 // TODO: Create a function to initialize app
-function init() {
+const init = () => {
     questions()
     .then(answers => {
-    writeToFile('./dist/README.md', answers);
+        return generateMarkdown(answers);
+    })
+    .catch(err => {
+        console.log(err);
     });
 };
 

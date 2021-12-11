@@ -6,6 +6,17 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
-  "license": "ISC"
+  "author": "Anna",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/acdodd17/generate-README.git"
+  },
+  "bugs": {
+    "url": "https://github.com/acdodd17/generate-README/issues"
+  },
+  "homepage": "https://github.com/acdodd17/generate-README#readme",
+  "dependencies": {
+    "inquirer": "^8.2.0"
+  }
 }
