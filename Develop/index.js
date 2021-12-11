@@ -123,26 +123,16 @@ const questions =  () => {
 
 // TODO: Create a function to write README file
 function writeToFile(fileName, data) {
-    fs.writeFile('README.md',data, err => {
-        if (err) {
-        console.log(err);
-         return;
-        }
-      console.log('Page created! Check out index.html in this directory to see it!');
-  }
-  )
+    
 };
 
 // TODO: Create a function to initialize app
 function init() {
     questions()
     .then(answers => {
-        console.log(answers)
-    })
-    .then(pageHTML => {
-        return writeToFile(pageHTML);
-    })
-}
+    writeToFile('./dist/README.md', answers);
+    });
+};
 
 // Function call to initialize app
 init();
