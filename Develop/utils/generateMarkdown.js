@@ -1,41 +1,13 @@
 // TODO: Create a function that returns a license badge based on which license is passed in
 // If there is no license, return an empty string
 const renderLicenseBadge = license => {
-  if(license === 'Apache'){
-    return 
-  } 
-  else if (license === 'GNU') {
-    return 
-  }
-  else if (license === 'MIT') {
-    return 
-  }
-  else if (license === 'ISC') {
-    return 
-  }
-  else {
-    return '';
-  }
+  
 };
 
 // TODO: Create a function that returns the license link
 // If there is no license, return an empty string
 const renderLicenseLink = license => {
-  if(license === 'Apache'){
-    return 
-  } 
-  else if (license === 'GNU') {
-    return 
-  }
-  else if (license === 'MIT') {
-    return 
-  }
-  else if (license === 'ISC') {
-    return 
-  }
-  else {
-    return '';
-  }
+  
 }
 
 // TODO: Create a function that returns the license section of README
@@ -49,14 +21,25 @@ const renderLicenseSection = license => {
 
 }
 
+// Section for contributing guidelines 
+const renderContributing = contributing => {
+  if (contributing) {
+    `If you wish to contribute to this project, please follow the guidelines outlined by the [Contributor Covenant](https://www.contributor-covenant.org/)`
+  }
+  else {
+    `Reach out to the author for [Questions](#questions).`
+  }
+}
+  
+
 // TODO: Create a function to generate markdown for README
-const generateMarkdown = data => {
+const generateMarkdown = answers => {
   return `
+  # ${answers.title}
   ${renderLicenseBadge}
-  # ${data.title}
 
   ## Description
-  ${data.description}
+  ${answers.description}
 
   ## Table of Contents
   *[Installation](#installation)
@@ -67,22 +50,26 @@ const generateMarkdown = data => {
   *[Questions](#questions)
 
   ## Installation 
-  ${data.installation}
+  ${answers.installation}
 
   ## Usage
-  ${data.usage}
+  ${answers.usage}
 
   ## License
   ${renderLicenseSection}
 
   ## Contributing
-  ${data.contributing}
+  ${renderContributing}
 
   ## Tests
-  ${data.tests}
+  ${answers.tests}
 
   ## Questions
-  ${data.questions}
+  Contact the author with any questions!<br>
+  Github link: [${answers.github
+		.trim()
+		.toLowerCase()}](https://github.com/${answers.github.trim().toLowerCase()})<br>
+  Email: ${answers.email}
 `;
 }
 

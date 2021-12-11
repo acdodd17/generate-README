@@ -1,9 +1,9 @@
-// TODO: Include packages needed for this application
+// Packages needed for this application
 const inquirer = require('inquirer');
 const fs = require('fs');
 const generateMarkdown = require('./utils/generateMarkdown.js');
 
-// TODO: Create an array of questions for user input
+// Array of questions for user input
 const questions =  () => {
     return inquirer.prompt([
         {
@@ -72,12 +72,12 @@ const questions =  () => {
         },
         {
             type: 'confirm',
-            name: 'contribution',
+            name: 'contributing',
             message: 'Would you like to use "Contributor Covenant" guidelines?',
             default: true
         },
         {
-            
+
         },
         {
             type: 'confirm',
@@ -118,21 +118,23 @@ const questions =  () => {
     ]);
 };
 
-// TODO: Create a function to write README file
-const writeToFile = (fileName, data) => {
-    generateMarkdown(answers);
+// Write README file
+const writeFile = (fileName, data) => {
+    fs.writeFile(`./${fileName}.md`, data, (err) => {
+        if (err) {
+            console.log(err)
+        }
+        console.log('Your README has been created!')
+    })
 };
 
-// TODO: Create a function to initialize app
+// Initialize app
 const init = () => {
     questions()
-    .then(answers => {
-        return generateMarkdown(answers);
-    })
+    .then(writeFile(title, generateMarkdown))
     .catch(err => {
         console.log(err);
     });
 };
 
-// Function call to initialize app
 init();
