@@ -1,53 +1,23 @@
-// TODO: Create a function that returns a license badge based on which license is passed in
-// If there is no license, return an empty string
-const renderLicenseBadge = license => {
-  
-};
-
-// TODO: Create a function that returns the license link
-// If there is no license, return an empty string
-const renderLicenseLink = license => {
-  
-}
-
-// TODO: Create a function that returns the license section of README
-// If there is no license, return an empty string
-const renderLicenseSection = license => {
-  if (!license) {
-    return '';
-  }
-
-  return `[This application is covered under the ${data.license} license](${renderLicenseLink})`
-
-}
-
-// Section for contributing guidelines 
-const renderContributing = contributing => {
-  if (contributing) {
-    `If you wish to contribute to this project, please follow the guidelines outlined by the [Contributor Covenant](https://www.contributor-covenant.org/)`
-  }
-  else {
-    `Reach out to the author for [Questions](#questions).`
-  }
-}
-  
-
-// TODO: Create a function to generate markdown for README
+// Generate markdown for README
 const generateMarkdown = answers => {
   return `
-  # ${answers.title}
-  ${renderLicenseBadge}
+  # ${answers.title.toUpperCase()}
+  [![License](https://img.shields.io/badge/License-${answers.license}-green)](https://choosealicense.com/licenses/${answers.license}/)
 
   ## Description
   ${answers.description}
 
+  ---
+
   ## Table of Contents
-  *[Installation](#installation)
-  *[Usage](#ssage)
-  *[License](#license)
-  *[Contributing](#contributing)
-  *[Tests](#tests)
-  *[Questions](#questions)
+  - [Installation](#installation)
+  - [Usage](#usage)
+  - [License](#license)
+  - [Contributing](#contributing)
+  - [Tests](#tests)
+  - [Questions](#questions)
+
+  ---
 
   ## Installation 
   ${answers.installation}
@@ -56,20 +26,24 @@ const generateMarkdown = answers => {
   ${answers.usage}
 
   ## License
-  ${renderLicenseSection}
-
+  This project is covered under the [${answers.license}](https://choosealicense.com/licenses/${answers.license}/) license.
+  
   ## Contributing
-  ${renderContributing}
+  ${answers.contributing}
 
   ## Tests
   ${answers.tests}
 
   ## Questions
-  Contact the author with any questions!<br>
-  Github link: [${answers.github
+  Questions? Contact me on GitHub or at the Email listed below!<br>
+  GitHub: [${answers.github
 		.trim()
 		.toLowerCase()}](https://github.com/${answers.github.trim().toLowerCase()})<br>
   Email: ${answers.email}
+
+  ---
+
+  Generated with ❤ by ${answers.authorName}
 `;
 }
 

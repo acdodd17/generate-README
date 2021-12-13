@@ -9,6 +9,19 @@ const questions =  () => {
     return inquirer.prompt([
         {
             type: 'input',
+            name: 'authorName',
+            message: 'What is your name? (Required)',
+            validate: authorName => {
+                if (authorName) {
+                    return true;
+                } else {
+                    console.log('Please enter your name!');
+                    return false;
+                }
+            }
+        },
+        {
+            type: 'input',
             name: 'title',
             message: 'What is the title of your project? (Required)',
             validate: projectTitle => {
@@ -62,7 +75,7 @@ const questions =  () => {
             type: 'list',
             name: 'license',
             message: 'Choose a license (Required)',
-            choices: ['Apache', 'GNU', 'MIT', 'ISC', 'No license'],
+            choices: ['Apache', 'MIT', 'GNU', 'ISC', 'Mozilla'],
             validate: projectLicense=> {
                 if(projectLicense) {
                     return true;   
@@ -72,32 +85,31 @@ const questions =  () => {
             }
         },
         {
-            type: 'confirm',
+            type: 'input',
             name: 'contributing',
-            message: 'Would you like to use "Contributor Covenant" guidelines?',
-            default: true
-        },
-        {
-            type: 'confirm',
-            name: 'confirmTests',
-            message: 'Would you like to provide examples of tests you have written for your application?',
-            default: true
+            message: 'Write in any guidelines for others to contirubute to your project?',
+            validate: contributing => {
+                if(contributing) {
+                    return true;   
+                } else {
+                    console.log('Please enter guidelines for contribution!')
+                } return false;
+            }
         },
         {
             type: 'input',
             name: 'tests',
             message: 'List any tests you have written for your application and provide examples on how to run them.',
-            when: ({ confirmTests }) => confirmTests
         },
         {
             type: 'input',
             name: 'github',
-            message: 'Enter your Github username. (Required)',
+            message: 'Enter your GitHub username. (Required)',
             validate: githubUsername => {
                 if(githubUsername) {
                     return true;   
                 } else {
-                    console.log('Please enter your Github username!')
+                    console.log('Please enter your GitHub username!')
                 } return false;
             }
         },
@@ -123,7 +135,7 @@ const init = () => {
     .then (answers => {
         console.log(answers);
         const fileData = generateMarkdown(answers)
-        fs.writeFile(`./${title}.md`, fileData, (err) => {
+        fs.writeFile(`./${answers.title}.md`, fileData, (err) => {
         
             if (err) {
                 console.log(err)
