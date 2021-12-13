@@ -19,5 +19,7 @@ So that I can quickly create a professional README.md file for a new project
 ## USAGE
 After runing `node index.js` in the command line to initialize the application, answer all prompts to generate a new README.md file for your project. You will find a new .md file with the name of your project as the title. 
 
+![Demo](Develop/assets/README_generator.gif)
+
 ## CONTRIBUTIONS
 Made with by ❤ [Anna Dodd](https://github.com/acdodd17)
